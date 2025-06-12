@@ -1,0 +1,1 @@
+This is a simple React frontend Boilerplate features a responsive navbar, home page , about and login page. Home page with a welcome message and features.Login form with Email id and password confirmation. Local: http://localhost:5173/
