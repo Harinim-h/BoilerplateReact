@@ -18,7 +18,7 @@ export default function About() {
             Vite for fast development and build.
             Tailwind CSS for styling.
             React Router for navigation.
-            Sample pages: Home, About, Login.
+            Sample pages: Home, About, Login and Register.
           </p>
         </div>
       </div>
