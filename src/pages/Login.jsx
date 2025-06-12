@@ -55,7 +55,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-auto space-y-6 border-2 border-blue-600 text-blue-600 font-semibold py-2 rounded-md hover:bg-blue-600 hover:text-white transition text-[20px]"
+          className="w-auto space-y-6 border-2 border-blue-600 text-blue-700 font-semibold py-2 rounded-md hover:bg-blue-700 hover:text-white transition text-[20px]"
         >
           LOGIN
         </button>
