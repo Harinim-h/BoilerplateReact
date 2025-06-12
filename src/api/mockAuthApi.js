@@ -1,24 +1,40 @@
-// ✅ Helper to get users from localStorage
+// ✅ Only 4 allowed users
+const allowedUsers = [
+  { email: 'user1@example.com', password: 'pass123' },
+  { email: 'user2@example.com', password: 'pass456' },
+  { email: 'user3@example.com', password: 'pass789' },
+  { email: 'user4@example.com', password: 'pass000' }
+];
+
+// ✅ Get registered users from localStorage
 const getUsers = () => {
   return JSON.parse(localStorage.getItem('users')) || [];
 };
 
-// ✅ Helper to save users to localStorage
+// ✅ Save users to localStorage
 const saveUsers = (users) => {
   localStorage.setItem('users', JSON.stringify(users));
 };
 
-// ✅ Register new user
+// ✅ Register only allowed users
 export const registerUser = (email, password) => {
   const users = getUsers();
 
-  // Check if email already registered
-  const exists = users.find((user) => user.email === email);
-  if (exists) {
-    throw new Error('User already exists. Please login instead.');
+  // Allow only if matches one of the 4 allowed users
+  const isAllowed = allowedUsers.find(
+    (u) => u.email === email && u.password === password
+  );
+  if (!isAllowed) {
+    throw new Error('Registration not allowed. Use one of the 4 predefined email/password combinations.');
   }
 
-  // Add new user and save
+  // Check if already registered
+  const exists = users.find((user) => user.email === email);
+  if (exists) {
+    throw new Error('User already registered. Please login.');
+  }
+
+  // Save user
   users.push({ email, password });
   saveUsers(users);
 };
@@ -27,7 +43,6 @@ export const registerUser = (email, password) => {
 export const loginUser = (email, password) => {
   const users = getUsers();
 
-  // Check if user exists and password matches
   const validUser = users.find(
     (user) => user.email === email && user.password === password
   );
@@ -36,24 +51,24 @@ export const loginUser = (email, password) => {
     throw new Error('Invalid email or password');
   }
 
-  // Store currently logged-in email
   localStorage.setItem('userEmail', email);
 };
 
-// ✅ Logout user (only clears session, not registration)
+// ✅ Logout user and remove them from registered list
 export const logoutUser = () => {
   const email = localStorage.getItem('userEmail');
   if (!email) return;
 
-  // Remove the logged-in email from localStorage
+  // Remove user from localStorage session
   localStorage.removeItem('userEmail');
 
-  // Remove user from registered users list
+  // Remove from registered list
   const users = getUsers();
-  const filteredUsers = users.filter(user => user.email !== email);
-  saveUsers(filteredUsers);
+  const updatedUsers = users.filter((user) => user.email !== email);
+  saveUsers(updatedUsers);
 };
 
+// ✅ Get current logged-in user
 export const getCurrentUser = () => {
   return localStorage.getItem('userEmail');
 };
