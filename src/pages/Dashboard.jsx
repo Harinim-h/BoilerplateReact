@@ -21,7 +21,7 @@ export default function Dashboard() {
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-md shadow-md text-center">
       <h1 className="text-3xl font-bold mb-6">
-        Welcome{userEmail ? `, ${userEmail}` : ''}!
+        Welcome user{userEmail ? `, ${userEmail}` : ''}!
       </h1>
 
       <button
