@@ -17,7 +17,7 @@ export default function About() {
           <p className="list-disc list-inside text-gray-700 text-base space-y-2">
             Vite for fast development and build.
             Tailwind CSS for styling.
-            React Router for navigation.
+            React Router  for navigation.
             Sample pages: Home, About, Login and Register.
           </p>
         </div>
