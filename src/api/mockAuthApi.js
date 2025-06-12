@@ -1,9 +1,9 @@
 // ✅ Only 4 allowed users
 const allowedUsers = [
-  { email: 'user1@example.com', password: 'pass123' },
-  { email: 'user2@example.com', password: 'pass456' },
-  { email: 'user3@example.com', password: 'pass789' },
-  { email: 'user4@example.com', password: 'pass000' }
+  { email: 'user1@example.com', password: '1234' },
+  { email: 'harini@example.com', password: '4567' },
+  { email: 'user2@example.com', password: 'pass789' },
+  { email: 'user3@example.com', password: 'pass000' }
 ];
 
 // ✅ Get registered users from localStorage
@@ -25,7 +25,7 @@ export const registerUser = (email, password) => {
     (u) => u.email === email && u.password === password
   );
   if (!isAllowed) {
-    throw new Error('Registration not allowed. Use one of the 4 predefined email/password combinations.');
+    throw new Error('Registration not allowed.Invalid User.');
   }
 
   // Check if already registered
