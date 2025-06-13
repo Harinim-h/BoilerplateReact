@@ -12,7 +12,7 @@ export default function About() {
       />
       
       <p className="text-2xl leading-relaxed text-[25px]">
-        This is a <strong>React frontend Boilerplate.</strong><br /><br />
+        This is a <strong>React Frontend Boilerplate.</strong><br /><br />
         This assignment uses <strong>Vite</strong> or <strong>Create React App</strong> to initialize the project.<br />
         Install <strong>Tailwind CSS</strong> for styling.<br />
         Add <strong>React Router</strong> for page navigation.
