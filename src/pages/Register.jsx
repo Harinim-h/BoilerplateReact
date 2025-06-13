@@ -1,7 +1,13 @@
 // src/pages/Register.jsx
 import React, { useState } from 'react';
-import { registerUser } from '../api/mockAuthApi';
 import { useNavigate } from 'react-router-dom';
+
+const allowedUsers = [
+  { email: 'user1@example.com', password: 'pass1' },
+  { email: 'user2@example.com', password: 'pass2' },
+  { email: 'user3@example.com', password: 'pass3' },
+  { email: 'user4@example.com', password: 'pass4' },
+];
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -12,13 +18,25 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-    try {
-      registerUser(email, password);
-      alert('Registered successfully!');
-      navigate('/login');
-    } catch (err) {
-      setError(err.message);
+
+    const isAllowed = allowedUsers.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (!isAllowed) {
+      setError('Only specific mock users are allowed to register.');
+      return;
     }
+
+    // Store the user in localStorage if not already present
+    if (localStorage.getItem(email)) {
+      setError('User already registered.');
+      return;
+    }
+
+    localStorage.setItem(email, JSON.stringify({ email, password }));
+    alert('Registered successfully!');
+    navigate('/login');
   };
 
   return (
@@ -27,7 +45,7 @@ export default function Register() {
       {error && <p className="text-red-600 mb-4 text-center">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block mb-2 font-semibold text-gray-700  text-[25px]">Email</label>
+          <label className="block mb-2 font-semibold text-gray-700 text-[25px]">Email</label>
           <input
             type="email"
             required
