@@ -1,4 +1,3 @@
-// src/pages/Register.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,16 +18,15 @@ export default function Register() {
     e.preventDefault();
     setError('');
 
-    const isAllowed = allowedUsers.find(
+    const matchedUser = allowedUsers.find(
       (user) => user.email === email && user.password === password
     );
 
-    if (!isAllowed) {
-      setError('Only specific mock users are allowed to register.');
+    if (!matchedUser) {
+      setError('Only 4 predefined users can register. Check email and password.');
       return;
     }
 
-    // Store the user in localStorage if not already present
     if (localStorage.getItem(email)) {
       setError('User already registered.');
       return;
